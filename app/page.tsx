@@ -16,17 +16,17 @@ const MAX_RESOURCES: Record<string, number> = {
 };
 
 const MINIMAL_CARDS = [
-  { id: "stone_sickle", name: "石镰收割", era: "stone", zone: "production", requirement: { type: "min", value: 2 }, effect: [{ type: "addResource", resource: "food", amount: 1 }], bonusEffects: [{condition: {type: "diceAtLeast", value: 4}, effect: [{type: "addResource", resource: "food", amount: 1}]}, {condition: {type: "diceEquals", value: 6}, effect: [{type: "protectResourceLoss", resource: "food", amount: 1}]}], knowledge: "石镰代表早期收割工具，能提高作物采收效率。面对寒潮风险，更高的效率不仅意味着平时温饱，更代表灾前有能力抢收更多救命粮。" },
-  { id: "gather_firewood", name: "拾薪备柴", era: "stone", zone: "production", requirement: { type: "min", value: 2 }, effect: [{ type: "addResource", resource: "fuel", amount: 1 }], bonusEffects: [{condition: {type: "diceAtLeast", value: 4}, effect: [{type: "addResource", resource: "fuel", amount: 1}]}, {condition: {type: "diceEquals", value: 6}, effect: [{type: "unfreezeCards", zone: "random", count: 1}]}], knowledge: "柴草是农耕村落抵御寒潮和恢复行动能力的基础资源。严冬里枯木不仅用于取暖，更是解冻僵化工具、让人力重新运转的核心动力。" },
+  { id: "stone_sickle", name: "石镰收割", era: "stone", zone: "production", requirement: { type: "min", value: 3 }, effect: [{ type: "addResource", resource: "food", amount: 1 }], bonusEffects: [{condition: {type: "diceAtLeast", value: 5}, effect: [{type: "addResource", resource: "food", amount: 1}]}, {condition: {type: "diceEquals", value: 6}, effect: [{type: "protectResourceLoss", resource: "food", amount: 1}]}], knowledge: "石镰代表早期收割工具，能提高作物采收效率。面对寒潮风险，更高的效率不仅意味着平时温饱，更代表灾前有能力抢收更多救命粮。" },
+  { id: "gather_firewood", name: "拾薪备柴", era: "stone", zone: "production", requirement: { type: "min", value: 2 }, effect: [{ type: "addResource", resource: "fuel", amount: 1 }], bonusEffects: [{condition: {type: "diceAtLeast", value: 3}, effect: [{type: "addResource", resource: "fuel", amount: 1}]}, {condition: {type: "diceEquals", value: 6}, effect: [{type: "unfreezeCards", zone: "random", count: 1}]}], knowledge: "柴草是农耕村落抵御寒潮和恢复行动能力的基础资源。严冬里枯木不仅用于取暖，更是解冻僵化工具、让人力重新运转的核心动力。" },
   { id: "pit_dwelling", name: "半地穴居", era: "stone", zone: "building", requirement: { type: "min", value: 2 }, effect: [{ type: "addResource", resource: "shelter", amount: 1 }], bonusEffects: [{condition: {type: "diceEquals", value: 6}, effect: [{type: "preventPopulationLoss", amount: 1}]}], knowledge: "半地穴式居住结构一半在地下，可以利用土壤的保温作用，是早期人类在没有高级供暖方式时，利用环境本身抵御严寒的典型智慧。" },
   { id: "mud_wall_repair", name: "土墙补屋", era: "stone", zone: "building", requirement: { type: "min", value: 3 }, effect: [{ type: "addResource", resource: "shelter", amount: 1 }, { type: "unfreezeCards", zone: "building", count: 1 }], bonusEffects: [{condition: {type: "diceAtLeast", value: 5}, effect: [{type: "unfreezeCards", zone: "random", count: 1}]}, {condition: {type: "diceEquals", value: 6}, effect: [{type: "addResource", resource: "shelter", amount: 1}]}], knowledge: "房屋外墙的维护和修补直接影响寒潮中的居住安全与密封性。风雪倒灌造成的伤亡不亚于单纯的低温，加固住所是常备事务。" },
   { id: "hearth_watch", name: "火塘守夜", era: "stone", zone: "emergency", requirement: { type: "min", value: 2 }, effect: [{ type: "loseResource", resource: "fuel", amount: 1 }, { type: "preventPopulationLoss", amount: 1 }], bonusEffects: [{condition: {type: "diceAtLeast", value: 4}, effect: [{type: "unfreezeCards", zone: "emergency", count: 1}]}, {condition: {type: "diceEquals", value: 6}, effect: [{type: "preventPopulationLoss", amount: 1}]}], knowledge: "火塘取暖是寒潮中保护人口的基础方式。在极其艰难的夜晚，有组织地持续守夜和添柴，是度过最危急关头、防止群体冻伤的关键。" },
-  { id: "share_firewood", name: "邻里分柴", era: "stone", zone: "emergency", requirement: { type: "min", value: 3 }, effect: [{ type: "conditional", condition: { type: "resourceAtMost", resource: "fuel", value: 1 }, then: [{ type: "addResource", resource: "fuel", amount: 2 }], else: [{ type: "addResource", resource: "fuel", amount: 1 }] }, { type: "addResource", resource: "coop", amount: 1 }], bonusEffects: [{condition: {type: "diceAtLeast", value: 5}, effect: [{type: "addResource", resource: "fuel", amount: 1}]}], unfreezeBonusEffects: [{condition: {type: "diceInList", values: [1,2]}, effect: [{type: "addResource", resource: "coop", amount: 1}]}], knowledge: "邻里互助能提高小农村落的整体抗灾韧性。即使劳动力低效，但在极端恶劣环境下，将极为有限的燃料资源重新分配，体现了早期社会结构的集体生存本能。" },
+  { id: "share_firewood", name: "邻里分柴", era: "stone", zone: "emergency", requirement: { type: "min", value: 3 }, effect: [{ type: "addResource", resource: "fuel", amount: 2 }, { type: "addResource", resource: "coop", amount: 1 }], bonusEffects: [{condition: {type: "diceAtLeast", value: 5}, effect: [{type: "addResource", resource: "fuel", amount: 1}]}], unfreezeBonusEffects: [{condition: {type: "diceInList", values: [1,2]}, effect: [{type: "addResource", resource: "coop", amount: 1}]}], knowledge: "邻里互助能提高小农村落的整体抗灾韧性。即使劳动力低效，但在极端恶劣环境下，将极为有限的燃料资源重新分配，体现了早期社会结构的集体生存本能。" },
   { id: "read_clouds", name: "观云识寒", era: "stone", zone: "info", requirement: { type: "min", value: 2 }, effect: [{ type: "previewNextDisaster" }], bonusEffects: [{condition: {type: "diceEquals", value: 6}, effect: [{type: "addResource", resource: "coop", amount: 1}]}], knowledge: "经验性天气观察能为农事安排争取准备时间。懂得‘云往东、一场空’的气象知识，不仅是玄学，更是农业社会以弱小农具应对巨大灾害的预警机制。" },
   { id: "elder_warning", name: "乡老告急", era: "stone", zone: "info", requirement: { type: "min", value: 3 }, effect: [{ type: "reduceNextRequirement", zone: "emergency", amount: -1, duration: 1 }], bonusEffects: [{condition: {type: "diceAtLeast", value: 5}, effect: [{type: "reduceNextRequirement", zone: "emergency", amount: -1, duration: 1}]}, {condition: {type: "diceEquals", value: 6}, effect: [{type: "unfreezeCards", zone: "emergency", count: 1}]}], knowledge: "乡老代表着村落的经验中心。在通讯极其低效的时代，有威望的长者迅速告急传令，能统筹调配人力应对灾难，大幅提高应急响应的效率。" },
   
   // Reward Cards
-  { id: "winter_granary", name: "冬前储粮", era: "stone", zone: "production", requirement: { type: "min", value: 3 }, effect: [{ type: "addResource", resource: "food", amount: 2 }], bonusEffects: [{condition: {type: "diceAtLeast", value: 5}, effect: [{type: "addResource", resource: "food", amount: 1}]}, {condition: {type: "diceEquals", value: 6}, effect: [{type: "protectResourceLoss", resource: "food", amount: 1}]}], knowledge: "农业社会高度依赖季节性收获特性，冬前集中规模储粮是抵御漫长严冬和意外霜冻的唯一可靠基石。储放不当还会导致损耗。" },
+  { id: "winter_granary", name: "冬前储粮", era: "stone", zone: "production", requirement: { type: "min", value: 3 }, effect: [{ type: "addResource", resource: "food", amount: 1 }], bonusEffects: [{condition: {type: "diceAtLeast", value: 4}, effect: [{type: "addResource", resource: "food", amount: 1}]}, {condition: {type: "diceEquals", value: 6}, effect: [{type: "protectResourceLoss", resource: "food", amount: 1}]}], knowledge: "农业社会高度依赖季节性收获特性，冬前集中规模储粮是抵御漫长严冬和意外霜冻的唯一可靠基石。储放不当还会导致损耗。" },
   { id: "straw_granary", name: "草棚粮仓", era: "stone", zone: "building", requirement: { type: "min", value: 3 }, effect: [{ type: "protectResourceLoss", resource: "food", amount: 1 }], bonusEffects: [{condition: {type: "diceEquals", value: 6}, effect: [{type: "addResource", resource: "food", amount: 1}]}], knowledge: "构建良好的仓储空间、架高的地板和厚实的草棚覆盖层，能有效阻隔冰雪渗透，大大减少粮食在风雪低温环境中的霉变与过度损耗。" },
   { id: "earth_up_seedlings", name: "培土护苗", era: "stone", zone: "emergency", requirement: { type: "min", value: 4 }, effect: [{ type: "protectResourceLoss", resource: "food", amount: 1 }], bonusEffects: [{condition: {type: "diceEquals", value: 6}, effect: [{type: "protectResourceLoss", resource: "food", amount: 1}]}], knowledge: "在严重霜冻来临之前，人工抢在变天前用泥土覆盖作物根部，能起到极好的保温防冻缓冲作用，这是早期农耕文明最简朴却实用的田间管理智慧。" },
   { id: "inspect_fields", name: "巡田看苗", era: "stone", zone: "info", requirement: { type: "min", value: 4 }, effect: [{ type: "chooseProtection", options: ["food", "shelter"], amount: 1 }], bonusEffects: [{condition: {type: "diceEquals", value: 6}, effect: [{type: "chooseProtection", options: ["food", "shelter"], amount: 1}]}], knowledge: "及时巡查风雪中的田间地头，能够提前察觉冰雪积水和漏风隐患。灾难不会立刻发生，细致巡查能让人防患于未然，避免溃堤效应。" },
@@ -36,6 +36,7 @@ const BRONZE_CARDS = [
   { id: "bronze_plough", name: "青铜犁整田", era: "bronze", zone: "production", requirement: { type: "min", value: 4 }, effect: [{ type: "addResource", resource: "food", amount: 2 }], bonusEffects: [{ condition: { type: "diceEquals", value: 6 }, effect: [{ type: "addResource", resource: "food", amount: 1 }] }], knowledge: "相较于木石，青铜犁更坚硬耐用，它极大提高了破土挖沟的深度与整地的效率。这是农业生产力历史性跨越的一个重要节点。" },
   { id: "bronze_spade_ditch", name: "青铜锹开沟", era: "bronze", zone: "building", requirement: { type: "min", value: 4 }, effect: [{ type: "unfreezeCards", zone: "random", count: 1 }, { type: "addResource", resource: "shelter", amount: 1 }], knowledge: "青铜锹等金属设施让开挖宽广深沟、迅速排水成为现实可能，有效减少了冰雪剧烈融化造成的次生水渍灾害和地基软化。" },
   { id: "public_granary", name: "公田粮仓", era: "bronze", zone: "building", requirement: { type: "min", value: 4 }, effect: [{ type: "protectResourceLoss", resource: "food", amount: 2 }], knowledge: "青铜时代村落规模扩大、中心化初显，公田概念与集体储粮系统逐渐形成，成为了对抗严重大跨度饥荒的社会级公共保障网络。" },
+  { id: "village_mobilization", name: "乡社动员", era: "bronze", zone: "info", requirement: { type: "min", value: 4 }, effect: [{ type: "addExtraDice" }], bonusEffects: [{condition: {type: "diceEquals", value: 6}, effect: [{type: "addResource", resource: "coop", amount: 1}]}], knowledge: "在灾害频发时期，青铜时代的村落凭借聚落规模扩大建立起更深层的动员机制。一声号令即可统筹人手，为危机应对挤压出额外的劳动力。" },
   { id: "night_watch_signal", name: "传更击柝", era: "bronze", zone: "info", requirement: { type: "min", value: 4 }, effect: [{ type: "preventPopulationLoss", amount: 1 }], bonusEffects: [{condition: {type: "diceAtLeast", value: 5}, effect: [{type: "addResource", resource: "coop", amount: 1}]}], knowledge: "借助铜质响器或更系统化的木梆进行夜间传更击柝，警戒和信号网络更为通达。它显著提高了农业聚落面对风雪暗夜险情的整体动员组织力。" }
 ];
 
@@ -72,6 +73,7 @@ const getEffectBadges = (effects: any[]) => {
           return <span key={idx} className="bg-red-100 text-red-800 px-1.5 py-0.5 rounded text-[10px] font-bold">-{e.amount} {e.resource === 'fuel' ? '柴草' : ''}</span>
       }
       if (e.type === 'preventPopulationLoss') return <span key={idx} className="bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded text-[10px] font-bold">抵消 {e.amount} 人口损失</span>
+      if (e.type === 'addExtraDice') return <span key={idx} className="bg-fuchsia-100 text-fuchsia-800 px-1.5 py-0.5 rounded text-[10px] font-bold">下轮回合劳力+1</span>
       if (e.type === 'unfreezeCards') return <span key={idx} className="bg-sky-100 text-sky-800 px-1.5 py-0.5 rounded text-[10px] font-bold">解冻 {e.count} 张</span>
       if (e.type === 'protectResourceLoss') return <span key={idx} className="bg-orange-100 text-orange-800 px-1.5 py-0.5 rounded text-[10px] font-bold">保护粮食</span>
       if (e.type === 'reduceNextRequirement') return <span key={idx} className="bg-purple-100 text-purple-800 px-1.5 py-0.5 rounded text-[10px] font-bold">下次需骰 -1</span>
@@ -116,6 +118,7 @@ const getBonusBadges = (def: any) => {
                 if (e.type === 'protectResourceLoss') badgeTxt = `保${e.resource === 'food'?'粮':e.resource==='shelter'?'房':'源'}`;
                 if (e.type === 'unfreezeCards') badgeTxt = `解冻1张`;
                 if (e.type === 'preventPopulationLoss') badgeTxt = `保1人`;
+                if (e.type === 'addExtraDice') badgeTxt = `下轮劳力+1`;
                 if (e.type === 'chooseProtection') badgeTxt = `多防1次`;
                 if (e.type === 'reduceNextRequirement') badgeTxt = `需求再-1`;
                 if (badgeTxt) badges.push(<span key={`b-${idx}-${eIdx}`} className="bg-amber-100 text-amber-800 px-1 py-0.5 rounded text-[9px] font-bold border border-amber-200" title="骰点超额收益">{condStr} {badgeTxt}</span>);
@@ -146,6 +149,24 @@ function checkBonusCondition(condition: any, dice: any, state: GameState, contex
     }
 }
 
+const HISTORICAL_CASES = [
+  { turn: 1, text: "【历史原像】仰韶文化时期，黄河流域的村落如半坡遗址，先民们通过建造半地穴式房屋，依靠中心火塘和木石工具，艰难度过了新石器时代的寒冬。" },
+  { turn: 2, text: "【历史原像】气候剧变曾导致龙山文化末期诸多聚落衰落。农业定居的特性意味着逃避灾难的空间变小，必须依赖“冬前储粮”等集中储备制度。" },
+  { turn: 3, text: "【历史原像】随着青铜工具的出现，夏商时期的聚落如二里头，开始出现大型公仓与更复杂的沟渠水利系统，以集体力量抵御大面积灾害。" },
+  { turn: 4, text: "【历史原像】西周时期推行“井田制”，村社协作（如“八家皆私百亩，同养公田”）不仅是赋税需要，更是维持水利与共御天灾的基础组织。" },
+  { turn: 5, text: "【历史原像】春秋战国时期，铁犁牛耕的普及极大提升了单产。如《吕氏春秋》记载对农时的精准把握（“顺天时，量地利”），让人类有更多余力对抗冻害。" },
+  { turn: 6, text: "【历史原像】汉代以后，随着《氾胜之书》等农学巨著总结了精耕细作技术，配合常平仓系统，中华农业文明的抗灾韧性达到新高度。" }
+];
+
+const getTurnEvaluation = (actions: any[], disaster: any) => {
+    if (!actions || actions.length === 0) return "【组织瘫痪】村落未做出有效反应，生产与防灾停滞。";
+    const totalResource = actions.reduce((sum, a) => sum + a.diceValue, 0);
+    if (totalResource >= 12) return "【应对有力】多线并进，劳作充分，有效缓冲了寒潮的冲击。";
+    if (actions.some(a => a.diceValue >= 5)) return "【精兵强将】以高效高强度的劳作优先解决关键危机。";
+    if (actions.length >= 3) return "【艰难维系】勉强组织起防微杜渐的劳作，展现出小农经济的韧性。";
+    return "【勉强支撑】劳力严重受限，只能优先保障最基本的生存需求。";
+}
+
 // --- STATE ---
 
 type GameState = {
@@ -171,6 +192,7 @@ type GameState = {
   activeResolvingType: string | null;
   activeResolvingCardId: string | null;
   freezeRandomizer: number[];
+  history: any[];
 };
 
 const initialState: GameState = {
@@ -183,7 +205,7 @@ const initialState: GameState = {
   logs: [], eduLogs: [], rewardChoices: [], gameResult: null, selectedDiceId: null,
   
   resolveQueue: [], resolveQueueKey: 0, resourceDeltas: {}, coopCards: [],
-  activeResolvingType: null, activeResolvingCardId: null, freezeRandomizer: [],
+  activeResolvingType: null, activeResolvingCardId: null, freezeRandomizer: [], history: [],
 };
 
 function gameReducer(state: GameState, action: any): GameState {
@@ -256,6 +278,9 @@ function gameReducer(state: GameState, action: any): GameState {
            case 'increaseNextRequirement':
               stateObj.nextTurnFlags.increaseProdReq = true;
               break;
+           case 'addExtraDice':
+              stateObj.nextTurnFlags.extraDice = (stateObj.nextTurnFlags.extraDice || 0) + 1;
+              break;
            case 'chooseProtection':
               stateObj.temporaryFlags.protectFoodLoss = (stateObj.temporaryFlags.protectFoodLoss || 0) + 1;
               stateObj.temporaryFlags.protectShelterLoss = (stateObj.temporaryFlags.protectShelterLoss || 0) + 1;
@@ -289,6 +314,7 @@ function gameReducer(state: GameState, action: any): GameState {
       nextState.turn = 1;
       nextState.logs = []; nextState.eduLogs = [];
       nextState.gameResult = null;
+      nextState.history = [];
       // Fallthrough to START_TURN logic
       
     case 'START_TURN':
@@ -311,6 +337,10 @@ function gameReducer(state: GameState, action: any): GameState {
 
       const frozenCount = nextState.cards.filter(c => c.frozen).length;
       let diceCount = frozenCount >= 3 ? 3 : 4;
+      if (nextState.temporaryFlags.extraDice) {
+          diceCount += nextState.temporaryFlags.extraDice;
+          log(`由于动员决策，本回合额外增加 ${nextState.temporaryFlags.extraDice} 个劳力（骰子）！`);
+      }
       nextState.dice = action.payload.diceVals.slice(0, diceCount).map((val: number, i: number) => ({
          id: `dice_${nextState.turn}_${i}`,
          value: val,
@@ -377,6 +407,28 @@ function gameReducer(state: GameState, action: any): GameState {
       nextState.resolveQueue.push({ type: 'coop' });
       nextState.resolveQueue.push({ type: 'disaster' });
       nextState.resolveQueue.push({ type: 'game_over_check', payload: action.payload });
+
+      const historyActions = assignedCardsInsts.map(c => {
+          const def = getCardDef(c.defId);
+          const d = nextState.dice.find(di => di.id === c.assignedDiceId);
+          let reqValue = def.requirement.value;
+          if (def.zone === 'emergency' && nextState.temporaryFlags.reduceEmergencyReq) reqValue -= 1;
+          if (def.zone === 'production' && nextState.temporaryFlags.increaseProdReq) reqValue += 1;
+          return {
+              cardName: def.name,
+              zone: def.zone,
+              diceValue: d?.value || 0,
+              reqValue: reqValue,
+              isFrozen: c.frozen
+          };
+      });
+      nextState.history.push({
+          turn: nextState.turn,
+          disaster: nextState.currentDisaster,
+          actions: historyActions,
+          rewardChosen: null
+      });
+
       return nextState;
 
     case 'PROCESS_NEXT_QUEUE_ITEM':
@@ -562,6 +614,10 @@ function gameReducer(state: GameState, action: any): GameState {
           instanceId: `card_${action.payload.id}_${Math.random()}`,
           defId: rDef.id, frozen: false, exhausted: false, assignedDiceId: null
       });
+      const lastHistory = nextState.history[nextState.history.length - 1];
+      if (lastHistory) {
+         lastHistory.rewardChosen = rDef.name;
+      }
       nextState.turn++;
       return gameReducer(nextState, { type: 'START_TURN', payload: action.payload });
       
@@ -582,7 +638,7 @@ export default function Game() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleInit = () => {
-     const diceVals = Array.from({length: 4}, () => Math.floor(Math.random() * 6) + 1);
+     const diceVals = Array.from({length: 8}, () => Math.floor(Math.random() * 6) + 1);
      const shuffledDisasters = [...MINIMAL_DISASTERS].sort(() => Math.random() - 0.5);
      dispatch({ type: 'INIT_AND_START', payload: { diceVals, shuffledDisasters } });
   }
@@ -650,7 +706,7 @@ export default function Game() {
   }
 
   const handleChooseReward = (id: string) => {
-      const diceVals = Array.from({length: 4}, () => Math.floor(Math.random() * 6) + 1);
+      const diceVals = Array.from({length: 8}, () => Math.floor(Math.random() * 6) + 1);
       dispatch({ type: 'CHOOSE_REWARD', payload: { id, diceVals } });
   }
 
@@ -973,22 +1029,94 @@ export default function Game() {
 
       {/* MODALS */}
       {state.phase === 'game_over' && (
-         <div className="fixed inset-0 bg-stone-900/80 backdrop-blur-md flex items-center justify-center z-50 p-4">
-            <div className="bg-white p-8 rounded-3xl max-w-md w-full text-center shadow-2xl">
-               <h2 className={cn("text-4xl font-black mb-4", state.gameResult === 'win' ? "text-amber-500" : "text-sky-600")}>
-                  {state.gameResult === 'win' ? '🎉 渡过寒冬' : '❄️ 村落覆灭'}
+         <div className="fixed inset-0 bg-[#F0EBE1] z-50 flex flex-col overflow-hidden text-stone-800">
+            <div className="p-8 pb-4 text-center">
+               <h2 className={cn("text-4xl font-black mb-2 text-stone-800", state.gameResult === 'win' ? "text-amber-600" : "text-sky-700")}>
+                  {state.gameResult === 'win' ? '文明赓续：历史回望' : '村落覆灭：历史遗迹'}
                </h2>
-               <p className="mb-8 text-stone-600 leading-relaxed font-medium">
-                  {state.gameResult === 'win' 
-                     ? '你们成功依靠村落的经验、储备与协作互助，在连续寒潮中生存了下来，农业文明的火种得以延续！' 
-                     : '人口归零，很遗憾，脆弱的早期防灾机制未能抵御自然伟力。'}
-               </p>
-               <button 
-                  onClick={() => window.location.reload()} 
-                  className="w-full py-4 bg-stone-900 text-white font-bold rounded-xl hover:bg-stone-800 transition-transform active:scale-95 shadow-lg"
-               >
-                  重新开始记录
-               </button>
+               <p className="text-stone-600 font-medium">在长达数个世纪（共 {state.turn} 回合）的抗争中，这是村落留下的生存编年史</p>
+            </div>
+            
+            <div className="flex-1 overflow-x-auto overflow-y-hidden px-8 pb-8 flex items-center snap-x snap-mandatory">
+               <div className="flex items-stretch gap-6 h-full py-4 min-h-[450px]">
+                   {state.history.map((turnData: any, idx: number) => (
+                      <div key={idx} className="snap-center shrink-0 w-80 md:w-96 bg-white rounded-3xl shadow-xl border border-stone-200 flex flex-col overflow-hidden relative group hover:scale-[1.02] transition-transform">
+                          {/* Header */}
+                          <div className="bg-stone-100 p-4 border-b border-stone-200 flex justify-between items-center">
+                              <div className="font-black text-xl text-stone-700">纪元 {turnData.turn}</div>
+                              <div className="flex items-center gap-1.5 text-sky-800 text-sm font-bold bg-sky-100 px-2 py-1 rounded">
+                                  <Snowflake size={14}/> {turnData.disaster?.name} 强度{turnData.disaster?.strength}
+                              </div>
+                          </div>
+                          {/* Content */}
+                          <div className="p-5 flex-1 flex flex-col overflow-y-auto">
+                              {/* 寒潮科普 */}
+                              <div className="mb-4">
+                                  <h4 className="text-[10px] font-black text-stone-400 mb-1.5 uppercase tracking-wider">气候挑战 / 知识</h4>
+                                  <p className="text-sm font-medium text-sky-900 bg-sky-50 px-3 py-2.5 rounded-lg leading-relaxed border border-sky-100/50">
+                                      {turnData.disaster?.knowledge}
+                                  </p>
+                              </div>
+
+                              {/* 行动记录 */}
+                              <div className="mb-4">
+                                  <h4 className="text-[10px] font-black text-stone-400 mb-1.5 uppercase tracking-wider">劳动与应对 / 决策</h4>
+                                  {!turnData.actions || turnData.actions.length === 0 ? (
+                                      <div className="text-sm text-stone-400 italic bg-stone-50 p-2.5 rounded text-center">本纪元无任何主动应对。</div>
+                                  ) : (
+                                      <div className="flex flex-col gap-1.5">
+                                          {turnData.actions.map((act: any, i: number) => (
+                                              <div key={i} className="flex justify-between items-center text-sm bg-stone-50 px-3 py-2.5 rounded-lg border border-stone-100">
+                                                  <span className="font-bold text-stone-700">{act.cardName}</span>
+                                                  <div className="flex items-center gap-2">
+                                                      {act.diceValue >= act.reqValue ? (
+                                                          <span className="text-[10px] bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded flex items-center font-bold">{act.isFrozen?"解冻发动":"发动成功"}</span>
+                                                      ) : (
+                                                          <span className="text-[10px] bg-stone-200 text-stone-500 px-1.5 py-0.5 rounded flex items-center font-bold">{act.isFrozen?"仅解冻":"点数不足"}</span>
+                                                      )}
+                                                      <span className="font-mono bg-white font-black px-2 py-0.5 rounded border border-stone-200 text-amber-600 shadow-sm">{act.diceValue}点</span>
+                                                  </div>
+                                              </div>
+                                          ))}
+                                      </div>
+                                  )}
+                              </div>
+
+                              {/* 技术传承 */}
+                              {turnData.rewardChosen && (
+                                 <div className="mb-5">
+                                     <h4 className="text-[10px] font-black text-stone-400 mb-1.5 uppercase tracking-wider">经验积累</h4>
+                                     <div className="text-sm font-bold text-amber-700 bg-amber-50 px-3 py-2 rounded-lg flex items-center gap-2 border border-amber-100/50">
+                                         <div className="w-2 h-2 bg-amber-400 rounded-full shadow-sm"></div>
+                                         习得新知识：{turnData.rewardChosen}
+                                     </div>
+                                 </div>
+                              )}
+
+                              {/* 史鉴 */}
+                              <div className="mt-auto pt-4 border-t border-stone-100 relative">
+                                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-white px-2 text-[10px] font-black text-stone-300 uppercase tracking-wider">史海倒影</div>
+                                  <p className="text-sm text-stone-600 leading-relaxed font-serif text-justify pt-2">
+                                      <span className="font-black text-stone-800 pr-1 block mb-1">{getTurnEvaluation(turnData.actions, turnData.disaster)}</span>
+                                      {HISTORICAL_CASES[turnData.turn - 1]?.text}
+                                  </p>
+                              </div>
+                          </div>
+                      </div>
+                   ))}
+                   
+                   {/* Restart Button Card */}
+                   <div className="snap-center shrink-0 w-80 h-full flex flex-col items-center justify-center bg-transparent border-2 border-dashed border-stone-300 rounded-3xl p-8 ml-4 hover:border-stone-400 hover:bg-stone-50/50 transition-colors">
+                       <ShieldAlert size={48} className="text-stone-300 mb-4" />
+                       <h3 className="font-black text-2xl text-stone-400 mb-6 text-center">历史的画卷已展尽</h3>
+                       <button 
+                        onClick={() => window.location.reload()} 
+                        className="px-8 py-4 bg-stone-900 text-white font-bold rounded-2xl hover:bg-stone-800 hover:scale-[1.02] transition-transform shadow-xl w-full"
+                       >
+                        再次翻开青史
+                       </button>
+                   </div>
+               </div>
             </div>
          </div>
       )}
